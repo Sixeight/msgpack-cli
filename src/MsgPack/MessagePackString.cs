@@ -275,9 +275,9 @@ namespace MsgPack
 #if MONO
 		private static int _isFastEqualsDisabled = 1;
 #elif NETFX_CORE
-		private static int _isFastEqualsDisabled = 0;
+		private static int _isFastEqualsDisabled = 1;
 #elif NETFX_35
-		private static int _isFastEqualsDisabled = 0;
+		private static int _isFastEqualsDisabled = 1;
 #elif !SILVERLIGHT
 		private static int _isFastEqualsDisabled =
 			typeof( MessagePackString ).GetMethod( "UnsafeFastEquals", BindingFlags.Instance | BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic ).IsSecuritySafeCritical ? 0 : 1;
@@ -441,3 +441,4 @@ namespace MsgPack
 		}
 	}
 }
+
