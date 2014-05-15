@@ -248,10 +248,6 @@ namespace MsgPack
 				{
 					return UnsafeFastEquals( left._encoded, right._encoded );
 				}
-				catch ( SecurityException )
-				{
-					Interlocked.Exchange( ref _isFastEqualsDisabled, 1 );
-				}
 				catch ( MemberAccessException )
 				{
 					Interlocked.Exchange( ref _isFastEqualsDisabled, 1 );
@@ -277,7 +273,7 @@ namespace MsgPack
 
 #if !WINDOWS_PHONE
 #if MONO
-		private static int _isFastEqualsDisabled = 0;
+		private static int _isFastEqualsDisabled = 1;
 #elif NETFX_CORE
 		private static int _isFastEqualsDisabled = 0;
 #elif NETFX_35
