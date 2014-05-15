@@ -60,6 +60,34 @@ Or open one of above solution files in your IDE and run build command in it.
 Open MsgPack.mono.sln with MonoDevelop and then click **Build** menu item.
 (Of cource, you can build via xbuild.)
 
+### For Unity
+
+* Build: use xbuild
+
+```
+$ xbuild xbuild MsgPack.compats.sln
+```
+
+* Put `MsgPack.dll` to you Unity project
+(about `Plugins` or `Libs` directory)
+
+```
+cp bin/net35-client/MsgPack.dll $UNITY_PROJECT/Assets/
+```
+
+* Create `link.xml`. msgpack-cli needs System.Linq but mscorlib has't it.
+
+```xml
+<linker>
+  <assembly fullname="System">
+    <type fullname="System.Linq" preserve="all" />
+  </assembly>
+</linker>
+```
+
+* Configure "Use micro mscorlib" (**REQUIRED**)
+* Build your project! :sushi:
+
 ## See also
 
 *  GitHub Page           : http://cli.msgpack.org/
@@ -68,3 +96,4 @@ Open MsgPack.mono.sln with MonoDevelop and then click **Build** menu item.
 *  Issue tracker         : https://github.com/msgpack/msgpack-cli/issues
 *  MSBuild reference     : http://msdn.microsoft.com/en-us/library/0k6kkbsd.aspx
 *  Mono xbuild reference : http://www.mono-project.com/Microsoft.Build
+
